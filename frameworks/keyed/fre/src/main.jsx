@@ -1,4 +1,4 @@
-import { h, render, useReducer, useCallback } from "fre"
+import { h, render, useReducer, useCallback, memo } from "../node_modules/fre/dist/fre.esm.js"
 
 function random(max) {
   return Math.round(Math.random() * 1000) % max
@@ -113,7 +113,7 @@ function listReducer(state, action) {
   return state
 }
 
-const Row = ({ selected, item, dispatch }) => {
+const Row = memo(({ selected, item, dispatch }) => {
   return (
     <tr className={selected ? "danger" : ""}>
       <td className="col-md-1">{item.id}</td>
@@ -129,7 +129,7 @@ const Row = ({ selected, item, dispatch }) => {
       <td className="col-md-6" />
     </tr>
   )
-}
+})
 
 const Button = ({ id, cb, title }) => (
   <div className="col-sm-6 smallpad">
@@ -145,7 +145,7 @@ const Button = ({ id, cb, title }) => (
 )
 
 
-const Jumbotron = ({ dispatch }) => (
+const Jumbotron = memo(({ dispatch }) => (
   <div className="jumbotron">
     <div className="row">
       <div className="col-md-6">
@@ -187,7 +187,7 @@ const Jumbotron = ({ dispatch }) => (
       </div>
     </div>
   </div>
-)
+))
 
 const Main = () => {
   const [state, setState] = useReducer(listReducer, { data: [], selected: 0 })
